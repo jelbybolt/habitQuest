@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro — HabitQuest</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--dark:#0a0c1a;--darker:#060810;--card:#111326;--border:#c0392b;--gold:#f39c12;--teal:#1abc9c;--red:#e74c3c;--cream:#f5e6c8;--pixel:'Press Start 2P',monospace;--body:'Rajdhani',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--body);background:var(--darker);color:var(--cream);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.12) 2px,rgba(0,0,0,.12) 4px);}
+.bg-grid{position:fixed;inset:0;opacity:.08;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:40px 40px;z-index:0;}
+.container{width:100%;max-width:500px;position:relative;z-index:10;}
+.back-btn{font-family:var(--pixel);font-size:.4rem;color:var(--teal);text-decoration:none;border:2px solid var(--teal);padding:7px 14px;display:inline-block;margin-bottom:20px;transition:.2s;}
+.back-btn:hover{background:var(--teal);color:var(--darker);}
+.card{background:var(--card);border:3px solid var(--border);box-shadow:6px 6px 0 rgba(192,57,43,.4);padding:36px;}
+.card-title{font-family:var(--pixel);font-size:.75rem;color:var(--gold);text-align:center;margin-bottom:6px;text-shadow:2px 2px 0 var(--border);}
+.card-sub{text-align:center;color:rgba(245,230,200,.6);font-size:.9rem;margin-bottom:28px;}
+.form-group{margin-bottom:18px;}
+.form-label{font-family:var(--pixel);font-size:.4rem;color:var(--gold);display:block;margin-bottom:8px;}
+.form-input{width:100%;background:#000;border:2px solid var(--border);color:var(--cream);padding:12px 14px;font-family:var(--body);font-size:1rem;outline:none;transition:.2s;}
+.form-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(243,156,18,.2);}
+.form-input::placeholder{color:rgba(245,230,200,.3);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.btn-submit{width:100%;font-family:var(--pixel);font-size:.5rem;padding:14px;background:var(--border);color:#fff;border:3px solid var(--gold);cursor:pointer;box-shadow:4px 4px 0 var(--gold);transition:transform .1s;margin-top:8px;}
+.btn-submit:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--gold);}
+.login-link{text-align:center;margin-top:20px;font-size:.9rem;color:rgba(245,230,200,.6);}
+.login-link a{color:var(--teal);text-decoration:none;}
+.login-link a:hover{text-decoration:underline;}
+.error{background:rgba(231,76,60,.15);border:2px solid var(--red);padding:10px;font-family:var(--pixel);font-size:.38rem;color:var(--red);display:none;margin-bottom:14px;}
+.error.show{display:block;}
+.success{background:rgba(26,188,156,.15);border:2px solid var(--teal);padding:14px;font-family:var(--pixel);font-size:.42rem;color:var(--teal);text-align:center;display:none;}
+.success.show{display:block;}
+.career-select{width:100%;background:#000;border:2px solid var(--border);color:var(--cream);padding:12px 14px;font-family:var(--body);font-size:1rem;outline:none;cursor:pointer;}
+.career-select:focus{border-color:var(--gold);}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="container">
+  <a href="index.html" class="back-btn">← REGRESAR</a>
+  <div class="card">
+    <div class="card-title">★ CREAR CUENTA</div>
+    <div class="card-sub">Únete a HabitQuest y comienza tu aventura académica</div>
+    <div class="error" id="errMsg"></div>
+    <div class="success" id="successMsg">¡CUENTA CREADA! REDIRIGIENDO...</div>
+    <form id="regForm" onsubmit="handleRegister(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">NOMBRE</label>
+          <input class="form-input" id="rNombre" type="text" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">APELLIDO</label>
+          <input class="form-input" id="rApellido" type="text" placeholder="Tu apellido" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">CORREO ELECTRÓNICO</label>
+        <input class="form-input" id="rEmail" type="email" placeholder="correo@ejemplo.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">CARRERA</label>
+        <select class="career-select" id="rCarrera">
+          <option value="Ingeniería en Sistemas">Ingeniería en Sistemas</option>
+          <option value="Ingeniería Civil">Ingeniería Civil</option>
+          <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+          <option value="Ingeniería Mecánica">Ingeniería Mecánica</option>
+          <option value="Otra">Otra carrera</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">CONTRASEÑA</label>
+        <input class="form-input" id="rPass" type="password" placeholder="Mínimo 6 caracteres" required minlength="6">
+      </div>
+      <div class="form-group">
+        <label class="form-label">CONFIRMAR CONTRASEÑA</label>
+        <input class="form-input" id="rPass2" type="password" placeholder="Repite tu contraseña" required>
+      </div>
+      <button type="submit" class="btn-submit">★ CREAR CUENTA Y JUGAR</button>
+    </form>
+    <div class="login-link">¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></div>
+  </div>
+</div>
+<script>
+function handleRegister(e){
+  e.preventDefault();
+  const nombre=document.getElementById('rNombre').value.trim();
+  const apellido=document.getElementById('rApellido').value.trim();
+  const email=document.getElementById('rEmail').value.trim().toLowerCase();
+  const carrera=document.getElementById('rCarrera').value;
+  const pass=document.getElementById('rPass').value;
+  const pass2=document.getElementById('rPass2').value;
+  const err=document.getElementById('errMsg');
+  err.classList.remove('show');
+  if(pass!==pass2){err.textContent='LAS CONTRASEÑAS NO COINCIDEN';err.classList.add('show');return;}
+  const users=JSON.parse(localStorage.getItem('hq_users')||'[]');
+  if(users.find(u=>u.email===email)){err.textContent='ESE CORREO YA ESTÁ REGISTRADO';err.classList.add('show');return;}
+  const newUser={id:Date.now(),nombre,apellido,email,carrera,pass,xp:0,streak:0,lastStudy:null,completedGames:[],gameResults:[],createdAt:new Date().toISOString(),role:'student'};
+  users.push(newUser);
+  localStorage.setItem('hq_users',JSON.stringify(users));
+  localStorage.setItem('hq_current',JSON.stringify(newUser));
+  document.getElementById('successMsg').classList.add('show');
+  document.getElementById('regForm').style.display='none';
+  setTimeout(()=>window.location.href='dashboard.html',1800);
+}
+</script>
+</body>
+</html>
