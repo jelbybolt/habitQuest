@@ -5,59 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Panel Admin — HabitQuest</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--dark:#0a0c1a;--darker:#060810;--card:#111326;--card2:#161930;--border:#c0392b;--gold:#f39c12;--teal:#1abc9c;--red:#e74c3c;--cream:#f5e6c8;--pixel:'Press Start 2P',monospace;--body:'Rajdhani',sans-serif;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:var(--body);background:var(--dark);color:var(--cream);min-height:100vh;}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.1) 2px,rgba(0,0,0,.1) 4px);}
-nav{background:var(--darker);border-bottom:3px solid var(--gold);display:flex;align-items:center;justify-content:space-between;padding:0 4%;height:60px;position:sticky;top:0;z-index:100;}
-.nav-logo{font-family:var(--pixel);font-size:.58rem;color:var(--gold);}
-.nav-right{display:flex;align-items:center;gap:12px;}
-.admin-badge{font-family:var(--pixel);font-size:.38rem;background:var(--gold);color:var(--darker);padding:5px 10px;}
-.btn-logout{font-family:var(--pixel);font-size:.38rem;color:var(--red);border:2px solid var(--red);padding:5px 10px;background:none;cursor:pointer;}
-.btn-logout:hover{background:var(--red);color:#fff;}
-main{max-width:1200px;margin:0 auto;padding:28px 4%;}
-.tabs{display:flex;gap:0;border-bottom:3px solid var(--gold);margin-bottom:28px;overflow-x:auto;}
-.tab{font-family:var(--pixel);font-size:.38rem;padding:12px 16px;cursor:pointer;border:none;background:none;color:rgba(245,230,200,.5);border-bottom:3px solid transparent;transition:.2s;white-space:nowrap;margin-bottom:-3px;}
-.tab:hover{color:var(--cream);}
-.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
-.page{display:none;}.page.active{display:block;}
-.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-bottom:28px;}
-.stat-box{background:var(--card);border:3px solid var(--gold);padding:18px;text-align:center;box-shadow:3px 3px 0 rgba(243,156,18,.3);}
-.sbox-num{font-family:var(--pixel);font-size:1.1rem;display:block;margin-bottom:6px;}
-.sbox-lbl{font-family:var(--pixel);font-size:.3rem;color:rgba(245,230,200,.5);}
-.section-h{font-family:var(--pixel);font-size:.5rem;color:var(--gold);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border);}
-table{width:100%;border-collapse:collapse;margin-bottom:28px;}
-th{background:var(--darker);border:2px solid var(--border);padding:10px 14px;font-family:var(--pixel);font-size:.32rem;color:var(--gold);text-align:left;}
-td{background:var(--card);border:2px solid var(--border);padding:10px 14px;font-size:.88rem;color:rgba(245,230,200,.85);vertical-align:middle;}
-tr:hover td{background:var(--card2);}
-.badge{display:inline-block;font-family:var(--pixel);font-size:.3rem;padding:3px 8px;}
-.badge-s{background:rgba(26,188,156,.2);color:var(--teal);border:1px solid var(--teal);}
-.badge-m{background:rgba(243,156,18,.2);color:var(--gold);border:1px solid var(--gold);}
-.badge-l{background:rgba(231,76,60,.2);color:var(--red);border:1px solid var(--red);}
-.btn-sm{font-family:var(--pixel);font-size:.32rem;padding:6px 12px;border:2px solid;cursor:pointer;background:none;transition:.1s;}
-.btn-view{border-color:var(--teal);color:var(--teal);}
-.btn-view:hover{background:var(--teal);color:var(--darker);}
-.btn-del{border-color:var(--red);color:var(--red);}
-.btn-del:hover{background:var(--red);color:#fff;}
-.chart-bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-.chart-label{font-family:var(--pixel);font-size:.32rem;color:rgba(245,230,200,.7);min-width:120px;}
-.chart-bar-bg{flex:1;background:#000;border:1px solid var(--border);height:18px;position:relative;overflow:hidden;}
-.chart-bar-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));transition:width .8s;}
-.chart-val{font-family:var(--pixel);font-size:.32rem;color:var(--gold);min-width:40px;text-align:right;}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px;}
-.modal-overlay.hidden{display:none;}
-.modal{background:var(--card);border:3px solid var(--gold);padding:28px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;}
-.modal-title{font-family:var(--pixel);font-size:.6rem;color:var(--gold);margin-bottom:20px;}
-.btn-close{font-family:var(--pixel);font-size:.38rem;padding:8px 16px;border:2px solid var(--red);color:var(--red);background:none;cursor:pointer;margin-top:16px;}
-.btn-close:hover{background:var(--red);color:#fff;}
-.empty-state{background:var(--card);border:3px solid var(--border);padding:32px;text-align:center;font-family:var(--pixel);font-size:.38rem;color:rgba(245,230,200,.3);}
-@media(max-width:700px){main{padding:16px 3%;}table{font-size:.8rem;}th{font-size:.28rem;}td{padding:8px;}}
-</style>
+<link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
 <nav>
-  <div class="nav-logo">HABITQUEST<br><span style="font-size:.4rem;color:rgba(243,156,18,.6);">PANEL ADMINISTRADOR</span></div>
+  <div class="nav-logo">HABITQUEST<br><span style="font-size:.4rem;">PANEL ADMINISTRADOR</span></div>
   <div class="nav-right">
     <span class="admin-badge">★ ADMIN</span>
     <button class="btn-logout" onclick="logout()">SALIR</button>
@@ -70,206 +22,47 @@ tr:hover td{background:var(--card2);}
     <button class="tab" onclick="showTab('sessions',this)">🎮 PARTIDAS</button>
     <button class="tab" onclick="showTab('charts',this)">📈 ESTADÍSTICAS</button>
   </div>
+  
   <!-- OVERVIEW -->
   <div class="page active" id="page-overview">
     <div class="stats-row">
-      <div class="stat-box"><span class="sbox-num" id="ovUsers" style="color:var(--teal)">0</span><div class="sbox-lbl">USUARIOS</div></div>
-      <div class="stat-box"><span class="sbox-num" id="ovSessions" style="color:var(--gold)">0</span><div class="sbox-lbl">PARTIDAS</div></div>
-      <div class="stat-box"><span class="sbox-num" id="ovAvgScore" style="color:var(--red)">0%</span><div class="sbox-lbl">PROM. PUNTAJE</div></div>
-      <div class="stat-box"><span class="sbox-num" id="ovTopXP" style="color:var(--gold)">0</span><div class="sbox-lbl">XP MÁX</div></div>
+      <div class="stat-box"><span class="sbox-num" id="ovUsers">0</span><div class="sbox-lbl">USUARIOS</div></div>
+      <div class="stat-box"><span class="sbox-num" id="ovSessions">0</span><div class="sbox-lbl">PARTIDAS</div></div>
+      <div class="stat-box"><span class="sbox-num" id="ovAvgScore">0%</span><div class="sbox-lbl">PROM. PUNTAJE</div></div>
+      <div class="stat-box"><span class="sbox-num" id="ovTopXP">0</span><div class="sbox-lbl">XP MÁX</div></div>
     </div>
     <div class="section-h">🏆 TOP 5 ESTUDIANTES</div>
     <table id="topTable"><tr><th>#</th><th>NOMBRE</th><th>CARRERA</th><th>XP</th><th>JUEGOS</th><th>RACHA</th></tr></table>
     <div class="section-h">🎮 ÚLTIMAS PARTIDAS</div>
     <table id="recentTable"><tr><th>ESTUDIANTE</th><th>DINÁMICA</th><th>PUNTAJE</th><th>XP</th><th>FECHA</th></tr></table>
   </div>
+  
   <!-- USERS -->
   <div class="page" id="page-users">
-    <div class="section-h">👥 TODOS LOS USUARIOS REGISTRADOS</div>
+    <div class="section-h">👥 TODOS LOS USUARIOS</div>
     <div id="usersTableWrap"></div>
   </div>
+  
   <!-- SESSIONS -->
   <div class="page" id="page-sessions">
     <div class="section-h">🎮 HISTORIAL DE PARTIDAS</div>
     <div id="sessionsTableWrap"></div>
   </div>
+  
   <!-- CHARTS -->
   <div class="page" id="page-charts">
     <div class="section-h">📈 RENDIMIENTO POR DINÁMICA</div>
-    <div id="gamesChart" style="margin-bottom:32px;"></div>
+    <div id="gamesChart"></div>
     <div class="section-h">🎓 DISTRIBUCIÓN DE XP</div>
     <div id="xpChart"></div>
   </div>
 </main>
+
 <!-- MODAL -->
 <div class="modal-overlay hidden" id="modalOverlay">
   <div class="modal" id="modalContent"></div>
 </div>
-<script>
-function init(){
-  const u=localStorage.getItem('hq_current');
-  if(!u){window.location.href='login.html';return;}
-  const cu=JSON.parse(u);
-  if(cu.role!=='admin'){window.location.href='dashboard.html';return;}
-  loadAll();
-}
-function loadAll(){
-  const users=JSON.parse(localStorage.getItem('hq_users')||'[]');
-  const sessions=JSON.parse(localStorage.getItem('hq_game_sessions')||'[]');
-  // Overview stats
-  document.getElementById('ovUsers').textContent=users.length;
-  document.getElementById('ovSessions').textContent=sessions.length;
-  const avg=sessions.length?Math.round(sessions.reduce((a,s)=>a+s.score,0)/sessions.length):0;
-  document.getElementById('ovAvgScore').textContent=avg+'%';
-  const maxXP=users.length?Math.max(...users.map(u=>u.xp||0)):0;
-  document.getElementById('ovTopXP').textContent=maxXP;
-  // Top 5
-  const top5=[...users].sort((a,b)=>(b.xp||0)-(a.xp||0)).slice(0,5);
-  const topT=document.getElementById('topTable');
-  top5.forEach((u,i)=>{
-    const row=topT.insertRow();
-    row.innerHTML=`<td style="font-family:var(--pixel);font-size:.45rem;color:var(--gold)">#${i+1}</td>
-      <td>${u.nombre} ${u.apellido}</td><td>${u.carrera||'-'}</td>
-      <td style="font-family:var(--pixel);font-size:.42rem;color:var(--gold)">${u.xp||0}</td>
-      <td>${(u.completedGames||[]).length}</td>
-      <td style="color:var(--red)">🔥${u.streak||0}</td>`;
-  });
-  if(!top5.length)topT.innerHTML+=`<tr><td colspan="6" style="text-align:center;color:rgba(245,230,200,.3);font-family:var(--pixel);font-size:.35rem;">SIN USUARIOS AÚN</td></tr>`;
-  // Recent sessions
-  const recT=document.getElementById('recentTable');
-  const recent=sessions.slice(-8).reverse();
-  recent.forEach(s=>{
-    const row=recT.insertRow();
-    const sc=s.score>=80?'badge-s':s.score>=50?'badge-m':'badge-l';
-    row.innerHTML=`<td>${s.userName||'?'}</td><td style="font-family:var(--pixel);font-size:.35rem;color:var(--gold)">${s.gameName}</td>
-      <td><span class="badge ${sc}">${s.score}%</span></td>
-      <td style="color:var(--gold)">+${s.xpEarned}</td>
-      <td style="color:rgba(245,230,200,.5)">${new Date(s.date).toLocaleDateString('es')}</td>`;
-  });
-  if(!recent.length)recT.innerHTML+=`<tr><td colspan="5" style="text-align:center;color:rgba(245,230,200,.3);font-family:var(--pixel);font-size:.35rem;">SIN PARTIDAS AÚN</td></tr>`;
-}
 
-function showTab(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  if(btn)btn.classList.add('active');
-  if(id==='users')renderUsers();
-  if(id==='sessions')renderSessions();
-  if(id==='charts')renderCharts();
-}
-
-function renderUsers(){
-  const users=JSON.parse(localStorage.getItem('hq_users')||'[]');
-  const wrap=document.getElementById('usersTableWrap');
-  if(!users.length){wrap.innerHTML='<div class="empty-state">NO HAY USUARIOS REGISTRADOS AÚN</div>';return;}
-  let html=`<table><tr><th>NOMBRE</th><th>EMAIL</th><th>CARRERA</th><th>XP</th><th>JUEGOS</th><th>RACHA</th><th>REGISTRO</th><th>ACCIONES</th></tr>`;
-  users.forEach(u=>{
-    html+=`<tr>
-      <td><strong>${u.nombre} ${u.apellido}</strong></td>
-      <td style="color:rgba(245,230,200,.6)">${u.email}</td>
-      <td>${u.carrera||'-'}</td>
-      <td style="font-family:var(--pixel);font-size:.42rem;color:var(--gold)">${u.xp||0}</td>
-      <td>${(u.completedGames||[]).length}/4</td>
-      <td style="color:var(--red)">🔥${u.streak||0}</td>
-      <td style="color:rgba(245,230,200,.5)">${new Date(u.createdAt||Date.now()).toLocaleDateString('es')}</td>
-      <td><button class="btn-sm btn-view" onclick="viewUser(${u.id})">VER</button>&nbsp;<button class="btn-sm btn-del" onclick="deleteUser(${u.id})">DEL</button></td>
-    </tr>`;
-  });
-  html+='</table>';
-  wrap.innerHTML=html;
-}
-
-function renderSessions(){
-  const sessions=JSON.parse(localStorage.getItem('hq_game_sessions')||'[]');
-  const wrap=document.getElementById('sessionsTableWrap');
-  if(!sessions.length){wrap.innerHTML='<div class="empty-state">NO HAY PARTIDAS REGISTRADAS AÚN</div>';return;}
-  let html=`<table><tr><th>ESTUDIANTE</th><th>DINÁMICA</th><th>PUNTAJE</th><th>XP GANADO</th><th>FECHA Y HORA</th></tr>`;
-  sessions.slice().reverse().forEach(s=>{
-    const sc=s.score>=80?'badge-s':s.score>=50?'badge-m':'badge-l';
-    html+=`<tr>
-      <td><strong>${s.userName||'?'}</strong></td>
-      <td style="font-family:var(--pixel);font-size:.35rem;color:var(--gold)">${s.gameName}</td>
-      <td><span class="badge ${sc}">${s.score}%</span></td>
-      <td style="color:var(--gold)">+${s.xpEarned} XP</td>
-      <td style="color:rgba(245,230,200,.5)">${new Date(s.date).toLocaleString('es')}</td>
-    </tr>`;
-  });
-  html+='</table>';
-  wrap.innerHTML=html;
-}
-
-function renderCharts(){
-  const sessions=JSON.parse(localStorage.getItem('hq_game_sessions')||'[]');
-  const users=JSON.parse(localStorage.getItem('hq_users')||'[]');
-  const games=['QUIZ BOSS','MEMORY MATRIX','TIME BREAKER','PRIORITY RUSH'];
-  let gc='';
-  games.forEach(g=>{
-    const gs=sessions.filter(s=>s.gameName===g);
-    const avg=gs.length?Math.round(gs.reduce((a,s)=>a+s.score,0)/gs.length):0;
-    gc+=`<div class="chart-bar-row">
-      <div class="chart-label">${g}</div>
-      <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:${avg}%"></div></div>
-      <div class="chart-val">${avg}% (${gs.length})</div>
-    </div>`;
-  });
-  document.getElementById('gamesChart').innerHTML=gc||'<div class="empty-state">SIN DATOS AÚN</div>';
-  // XP ranges
-  const ranges=[{l:'0-99',min:0,max:99},{l:'100-499',min:100,max:499},{l:'500-999',min:500,max:999},{l:'1000+',min:1000,max:99999}];
-  let xc='';
-  const maxU=Math.max(1,...ranges.map(r=>users.filter(u=>(u.xp||0)>=r.min&&(u.xp||0)<=r.max).length));
-  ranges.forEach(r=>{
-    const cnt=users.filter(u=>(u.xp||0)>=r.min&&(u.xp||0)<=r.max).length;
-    const pct=Math.round((cnt/maxU)*100);
-    xc+=`<div class="chart-bar-row">
-      <div class="chart-label">${r.l} XP</div>
-      <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:${pct}%;background:linear-gradient(90deg,var(--teal),var(--gold))"></div></div>
-      <div class="chart-val">${cnt} usuarios</div>
-    </div>`;
-  });
-  document.getElementById('xpChart').innerHTML=xc||'<div class="empty-state">SIN USUARIOS AÚN</div>';
-}
-
-function viewUser(id){
-  const users=JSON.parse(localStorage.getItem('hq_users')||'[]');
-  const u=users.find(x=>x.id===id);
-  if(!u)return;
-  const sessions=JSON.parse(localStorage.getItem('hq_game_sessions')||'[]');
-  const userSess=sessions.filter(s=>s.userId===id);
-  document.getElementById('modalContent').innerHTML=`
-    <div class="modal-title">👤 ${u.nombre} ${u.apellido}</div>
-    <table style="margin-bottom:16px;">
-      <tr><td style="font-family:var(--pixel);font-size:.35rem;color:var(--gold)">EMAIL</td><td>${u.email}</td></tr>
-      <tr><td style="font-family:var(--pixel);font-size:.35rem;color:var(--gold)">CARRERA</td><td>${u.carrera||'-'}</td></tr>
-      <tr><td style="font-family:var(--pixel);font-size:.35rem;color:var(--gold)">XP TOTAL</td><td style="color:var(--gold)">${u.xp||0}</td></tr>
-      <tr><td style="font-family:var(--pixel);font-size:.35rem;color:var(--gold)">RACHA</td><td style="color:var(--red)">🔥 ${u.streak||0} días</td></tr>
-      <tr><td style="font-family:var(--pixel);font-size:.35rem;color:var(--gold)">JUEGOS</td><td>${(u.completedGames||[]).join(', ')||'ninguno'}</td></tr>
-      <tr><td style="font-family:var(--pixel);font-size:.35rem;color:var(--gold)">REGISTRO</td><td>${new Date(u.createdAt||Date.now()).toLocaleString('es')}</td></tr>
-    </table>
-    <div style="font-family:var(--pixel);font-size:.38rem;color:var(--gold);margin-bottom:10px;">RESULTADOS (${userSess.length} partidas)</div>
-    ${userSess.length?userSess.map(s=>{
-      const sc=s.score>=80?'badge-s':s.score>=50?'badge-m':'badge-l';
-      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:var(--card2);border:1px solid var(--border);margin-bottom:6px;">
-        <span style="font-family:var(--pixel);font-size:.32rem;color:var(--gold)">${s.gameName}</span>
-        <span class="badge ${sc}">${s.score}%</span>
-        <span style="color:var(--gold);font-family:var(--pixel);font-size:.32rem;">+${s.xpEarned}</span>
-        <span style="color:rgba(245,230,200,.5);font-size:.8rem;">${new Date(s.date).toLocaleDateString('es')}</span>
-      </div>`;
-    }).join(''):`<div style="color:rgba(245,230,200,.4);font-family:var(--pixel);font-size:.35rem;text-align:center;padding:16px;">SIN PARTIDAS</div>`}
-    <button class="btn-close" onclick="closeModal()">✕ CERRAR</button>`;
-  document.getElementById('modalOverlay').classList.remove('hidden');
-}
-
-function deleteUser(id){
-  if(!confirm('¿Eliminar este usuario?'))return;
-  let users=JSON.parse(localStorage.getItem('hq_users')||'[]');
-  users=users.filter(u=>u.id!==id);
-  localStorage.setItem('hq_users',JSON.stringify(users));
-  renderUsers();
-}
-function closeModal(){document.getElementById('modalOverlay').classList.add('hidden');}
-function logout(){localStorage.removeItem('hq_current');window.location.href='index.html';}
-init();
-</script>
+<script src="js/admin.js"></script>
 </body>
 </html>

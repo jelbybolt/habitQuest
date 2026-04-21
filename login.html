@@ -5,31 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Iniciar Sesión — HabitQuest</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--dark:#0a0c1a;--darker:#060810;--card:#111326;--border:#c0392b;--gold:#f39c12;--teal:#1abc9c;--red:#e74c3c;--cream:#f5e6c8;--pixel:'Press Start 2P',monospace;--body:'Rajdhani',sans-serif;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:var(--body);background:var(--darker);color:var(--cream);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden;}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.12) 2px,rgba(0,0,0,.12) 4px);}
-.bg-grid{position:fixed;inset:0;opacity:.08;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:40px 40px;z-index:0;}
-.container{width:100%;max-width:440px;position:relative;z-index:10;}
-.back-btn{font-family:var(--pixel);font-size:.4rem;color:var(--teal);text-decoration:none;border:2px solid var(--teal);padding:7px 14px;display:inline-block;margin-bottom:20px;transition:.2s;}
-.back-btn:hover{background:var(--teal);color:var(--darker);}
-.card{background:var(--card);border:3px solid var(--border);box-shadow:6px 6px 0 rgba(192,57,43,.4);padding:36px;}
-.card-title{font-family:var(--pixel);font-size:.75rem;color:var(--gold);text-align:center;margin-bottom:6px;text-shadow:2px 2px 0 var(--border);}
-.card-sub{text-align:center;color:rgba(245,230,200,.6);font-size:.9rem;margin-bottom:28px;}
-.form-group{margin-bottom:18px;}
-.form-label{font-family:var(--pixel);font-size:.4rem;color:var(--gold);display:block;margin-bottom:8px;}
-.form-input{width:100%;background:#000;border:2px solid var(--border);color:var(--cream);padding:12px 14px;font-family:var(--body);font-size:1rem;outline:none;transition:.2s;}
-.form-input:focus{border-color:var(--gold);}
-.form-input::placeholder{color:rgba(245,230,200,.3);}
-.btn-submit{width:100%;font-family:var(--pixel);font-size:.5rem;padding:14px;background:var(--border);color:#fff;border:3px solid var(--gold);cursor:pointer;box-shadow:4px 4px 0 var(--gold);transition:transform .1s;margin-top:8px;}
-.btn-submit:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--gold);}
-.reg-link{text-align:center;margin-top:20px;font-size:.9rem;color:rgba(245,230,200,.6);}
-.reg-link a{color:var(--gold);text-decoration:none;}
-.error{background:rgba(231,76,60,.15);border:2px solid var(--red);padding:10px;font-family:var(--pixel);font-size:.38rem;color:var(--red);display:none;margin-bottom:14px;}
-.error.show{display:block;}
-.admin-hint{margin-top:16px;padding:12px;background:rgba(243,156,18,.08);border:2px solid rgba(243,156,18,.3);font-family:var(--pixel);font-size:.35rem;color:rgba(243,156,18,.7);text-align:center;line-height:1.8;}
-</style>
+<link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 <div class="bg-grid"></div>
@@ -39,7 +15,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
     <div class="card-title">▶ INICIAR SESIÓN</div>
     <div class="card-sub">Continúa tu aventura académica</div>
     <div class="error" id="errMsg"></div>
-    <form id="loginForm" onsubmit="handleLogin(event)">
+    <form id="loginForm">
       <div class="form-group">
         <label class="form-label">CORREO ELECTRÓNICO</label>
         <input class="form-input" id="lEmail" type="email" placeholder="correo@ejemplo.com" required>
@@ -51,27 +27,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
       <button type="submit" class="btn-submit">▶ CONTINUAR JUGANDO</button>
     </form>
     <div class="reg-link">¿No tienes cuenta? <a href="registro.html">Regístrate gratis</a></div>
-    <div class="admin-hint">ADMIN: usa admin@habitquest.com / admin2026<br>para acceder al panel de administración</div>
+    <div class="admin-hint">ADMIN: admin@habitquest.com / admin2026</div>
   </div>
 </div>
-<script>
-function handleLogin(e){
-  e.preventDefault();
-  const email=document.getElementById('lEmail').value.trim().toLowerCase();
-  const pass=document.getElementById('lPass').value;
-  const err=document.getElementById('errMsg');
-  err.classList.remove('show');
-  // Admin check
-  if(email==='admin@habitquest.com'&&pass==='admin2026'){
-    localStorage.setItem('hq_current',JSON.stringify({id:'admin',nombre:'Admin',apellido:'HabitQuest',email,role:'admin'}));
-    window.location.href='admin.html';return;
-  }
-  const users=JSON.parse(localStorage.getItem('hq_users')||'[]');
-  const user=users.find(u=>u.email===email&&u.pass===pass);
-  if(!user){err.textContent='CORREO O CONTRASEÑA INCORRECTOS';err.classList.add('show');return;}
-  localStorage.setItem('hq_current',JSON.stringify(user));
-  window.location.href='dashboard.html';
-}
-</script>
+<script src="js/login.js"></script>
 </body>
 </html>

@@ -3,216 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HabitQuest — Hábitos de Estudio</title>
+<title>Dashboard — HabitQuest</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--dark:#0a0c1a;--darker:#060810;--card:#111326;--border:#c0392b;--border2:#e74c3c;--gold:#f39c12;--gold2:#f1c40f;--teal:#1abc9c;--cyan:#00d4ff;--red:#e74c3c;--cream:#f5e6c8;--pixel:'Press Start 2P',monospace;--body:'Rajdhani',sans-serif;}
-*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
-body{font-family:var(--body);background:var(--dark);color:var(--cream);overflow-x:hidden;}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.12) 2px,rgba(0,0,0,.12) 4px);}
-nav{background:var(--darker);border-bottom:3px solid var(--border);position:sticky;top:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 4%;height:64px;}
-.nav-logo{font-family:var(--pixel);font-size:.65rem;color:var(--gold);text-shadow:2px 2px 0 var(--border);line-height:1.4;}
-.nav-links{display:flex;list-style:none;}
-.nav-links a{font-family:var(--pixel);font-size:.4rem;color:var(--cream);text-decoration:none;padding:8px 12px;border-right:2px solid var(--border);transition:.2s;}
-.nav-links a:hover{background:var(--border);color:var(--gold);}
-.nav-links li:first-child a{border-left:2px solid var(--border);}
-.nav-btns{display:flex;gap:8px;}
-.btn-nav{font-family:var(--pixel);font-size:.4rem;padding:8px 12px;border:2px solid;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;transition:transform .1s;}
-.btn-nav:hover{transform:translate(-2px,-2px);}
-.btn-login{border-color:var(--teal);color:var(--teal);background:rgba(26,188,156,.1);}
-.btn-login:hover{box-shadow:3px 3px 0 var(--teal);}
-.btn-register{border-color:var(--gold);color:var(--gold);background:rgba(243,156,18,.1);}
-.btn-register:hover{box-shadow:3px 3px 0 var(--gold);}
-.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:8px;}
-.hamburger span{width:22px;height:2px;background:var(--cream);display:block;}
-.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--darker);border-bottom:3px solid var(--border);padding:16px;z-index:499;flex-direction:column;gap:6px;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{font-family:var(--pixel);font-size:.4rem;color:var(--cream);text-decoration:none;padding:10px;border:2px solid var(--border);}
-.ticker{background:var(--border);border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);padding:10px 0;overflow:hidden;white-space:nowrap;}
-.ticker-inner{display:inline-block;animation:ticker 30s linear infinite;font-family:var(--pixel);font-size:.4rem;color:var(--gold);letter-spacing:2px;}
-@keyframes ticker{0%{transform:translateX(100vw);}100%{transform:translateX(-100%)}}
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:100px 4% 60px;background:radial-gradient(ellipse at 20% 50%,rgba(231,76,60,.15),transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(0,212,255,.1),transparent 40%),var(--darker);}
-.hero-cityscape{position:absolute;bottom:0;left:0;right:0;height:160px;opacity:.25;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 160'%3E%3Crect x='0' y='70' width='40' height='90' fill='%23c0392b'/%3E%3Crect x='50' y='40' width='60' height='120' fill='%23922b21'/%3E%3Crect x='120' y='80' width='30' height='80' fill='%23a93226'/%3E%3Crect x='160' y='30' width='80' height='130' fill='%23922b21'/%3E%3Crect x='250' y='60' width='50' height='100' fill='%23a93226'/%3E%3Crect x='310' y='20' width='90' height='140' fill='%23922b21'/%3E%3Crect x='410' y='70' width='40' height='90' fill='%23c0392b'/%3E%3Crect x='460' y='40' width='70' height='120' fill='%23a93226'/%3E%3Crect x='540' y='55' width='55' height='105' fill='%23922b21'/%3E%3Crect x='605' y='30' width='100' height='130' fill='%23a93226'/%3E%3Crect x='715' y='65' width='45' height='95' fill='%23c0392b'/%3E%3Crect x='770' y='25' width='80' height='135' fill='%23922b21'/%3E%3Crect x='860' y='70' width='35' height='90' fill='%23a93226'/%3E%3Crect x='905' y='45' width='65' height='115' fill='%23922b21'/%3E%3Crect x='980' y='40' width='75' height='120' fill='%23a93226'/%3E%3Crect x='1065' y='65' width='50' height='95' fill='%23c0392b'/%3E%3Crect x='1125' y='35' width='75' height='125' fill='%23922b21'/%3E%3C/svg%3E");background-repeat:repeat-x;background-position:bottom;background-size:1200px 160px;animation:cityScroll 30s linear infinite;}
-@keyframes cityScroll{0%{background-position:0 bottom;}100%{background-position:-1200px bottom;}}
-.hero-badge{font-family:var(--pixel);font-size:.45rem;background:var(--border);color:#fff;padding:6px 16px;margin-bottom:24px;animation:blink 1.4s step-end infinite;letter-spacing:2px;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-.hero-title{font-family:var(--pixel);font-size:clamp(.85rem,3.5vw,2rem);color:var(--gold);text-align:center;line-height:1.6;text-shadow:3px 3px 0 var(--border),6px 6px 0 rgba(231,76,60,.3);margin-bottom:24px;animation:glitch 6s infinite;}
-@keyframes glitch{0%,89%,100%{text-shadow:3px 3px 0 var(--border),6px 6px 0 rgba(231,76,60,.3);}90%{text-shadow:-3px 3px 0 var(--cyan),3px -3px 0 var(--red);}92%{text-shadow:3px 3px 0 var(--border),6px 6px 0 rgba(231,76,60,.3);}}
-.hero-sub{font-size:1.15rem;color:rgba(245,230,200,.75);text-align:center;max-width:580px;margin-bottom:40px;line-height:1.7;}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
-.btn-primary{font-family:var(--pixel);font-size:.5rem;padding:13px 24px;background:var(--border);color:#fff;border:3px solid var(--gold);cursor:pointer;text-decoration:none;box-shadow:4px 4px 0 var(--gold);transition:transform .1s,box-shadow .1s;display:inline-block;}
-.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--gold);}
-.btn-secondary{font-family:var(--pixel);font-size:.5rem;padding:13px 24px;background:transparent;color:var(--teal);border:3px solid var(--teal);cursor:pointer;text-decoration:none;box-shadow:4px 4px 0 rgba(26,188,156,.4);transition:transform .1s;display:inline-block;}
-.btn-secondary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--teal);}
-.stats-bar{background:var(--card);border-top:3px solid var(--border);border-bottom:3px solid var(--border);padding:20px 4%;display:flex;justify-content:space-around;gap:16px;flex-wrap:wrap;}
-.stat-item{text-align:center;}
-.stat-num{font-family:var(--pixel);font-size:1.1rem;color:var(--gold);display:block;}
-.stat-lbl{font-size:.85rem;color:rgba(245,230,200,.6);margin-top:4px;font-weight:600;letter-spacing:1px;}
-section{padding:56px 4%;}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
-.about-text h2{font-family:var(--pixel);font-size:clamp(.6rem,2vw,1rem);color:var(--red);margin-bottom:16px;}
-.about-text p{font-size:1rem;line-height:1.8;color:rgba(245,230,200,.8);margin-bottom:14px;}
-.about-terminal{background:#000;border:3px solid var(--teal);box-shadow:6px 6px 0 rgba(26,188,156,.3);padding:22px;}
-.terminal-bar{display:flex;gap:8px;margin-bottom:14px;}
-.t-dot{width:12px;height:12px;}
-.t-red{background:var(--red);}
-.t-gold{background:var(--gold);}
-.t-teal{background:var(--teal);}
-.terminal-line{font-family:'Courier New',monospace;font-size:.8rem;margin-bottom:7px;color:var(--teal);}
-.terminal-line span{color:var(--gold);}
-.terminal-cursor{display:inline-block;width:8px;height:13px;background:var(--teal);animation:blink 1s step-end infinite;vertical-align:middle;}
-.float{animation:floatA 3s ease-in-out infinite;}
-@keyframes floatA{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-.section-title{font-family:var(--pixel);font-size:clamp(.55rem,1.8vw,.9rem);color:var(--gold);text-align:center;margin-bottom:8px;text-shadow:2px 2px 0 var(--border);}
-.section-sub{text-align:center;color:rgba(245,230,200,.6);font-size:1rem;margin-bottom:36px;}
-.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;}
-.feature-card{background:var(--card);border:3px solid var(--border);padding:24px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;box-shadow:4px 4px 0 rgba(192,57,43,.3);}
-.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--border));}
-.feature-card:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--border);}
-.fc-icon{font-size:2.2rem;margin-bottom:12px;display:block;}
-.fc-title{font-family:var(--pixel);font-size:.48rem;color:var(--gold);margin-bottom:10px;}
-.fc-desc{font-size:.9rem;color:rgba(245,230,200,.7);line-height:1.7;}
-.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;}
-.game-card{background:var(--card);border:3px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:4px 4px 0 rgba(192,57,43,.3);text-decoration:none;color:inherit;display:block;}
-.game-card:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--gold);}
-.game-thumb{height:130px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden;}
-.gt1{background:linear-gradient(135deg,#1a0a2e,#4a1942);}
-.gt2{background:linear-gradient(135deg,#0a1a2e,#0a3d5c);}
-.gt3{background:linear-gradient(135deg,#1a2e0a,#2d5c0a);}
-.gt4{background:linear-gradient(135deg,#2e1a0a,#5c3d0a);}
-.game-pixel-grid{position:absolute;inset:0;opacity:.2;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:18px 18px;}
-.game-info{padding:16px;}
-.game-title{font-family:var(--pixel);font-size:.45rem;color:var(--gold);margin-bottom:6px;}
-.game-desc{font-size:.88rem;color:rgba(245,230,200,.7);line-height:1.6;margin-bottom:10px;}
-.game-badge{display:inline-block;font-family:var(--pixel);font-size:.38rem;padding:4px 10px;background:var(--border);color:#fff;}
-.inv-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
-.inv-card{background:var(--card);border:3px solid var(--gold);padding:24px;box-shadow:4px 4px 0 rgba(243,156,18,.3);}
-.inv-card h3{font-family:var(--pixel);font-size:.48rem;color:var(--gold);margin-bottom:14px;}
-.inv-card p,.inv-card li{font-size:.93rem;color:rgba(245,230,200,.8);line-height:1.8;}
-.inv-card ul{padding-left:18px;}
-footer{background:var(--darker);border-top:3px solid var(--border);padding:36px 4%;}
-.footer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:28px;margin-bottom:28px;}
-.footer-col h4{font-family:var(--pixel);font-size:.45rem;color:var(--gold);margin-bottom:14px;}
-.footer-col ul{list-style:none;}
-.footer-col li{margin-bottom:7px;}
-.footer-col a{color:rgba(245,230,200,.6);text-decoration:none;font-size:.88rem;transition:.2s;}
-.footer-col a:hover{color:var(--gold);}
-.footer-bottom{border-top:2px solid var(--border);padding-top:18px;font-family:var(--pixel);font-size:.38rem;color:rgba(245,230,200,.4);text-align:center;}
-@media(max-width:860px){.nav-links,.nav-btns{display:none;}.hamburger{display:flex;}.about-grid,.inv-grid{grid-template-columns:1fr;}}
-@media(max-width:560px){.hero-title{font-size:.75rem;}.hero-badge{font-size:.38rem;}.btn-primary,.btn-secondary{font-size:.42rem;padding:11px 16px;}.stat-num{font-size:.85rem;}}
-</style>
+<link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
 <nav>
-  <div class="nav-logo">HABIT<br>QUEST</div>
-  <ul class="nav-links">
-    <li><a href="#inicio">INICIO</a></li>
-    <li><a href="#acerca">ACERCA</a></li>
-    <li><a href="#temas">TEMAS</a></li>
-    <li><a href="#dinamicas">DINÁMICAS</a></li>
-    <li><a href="#investigacion">INVESTIGACIÓN</a></li>
-  </ul>
-  <div class="nav-btns">
-    <a href="login.html" class="btn-nav btn-login">▶ INGRESAR</a>
-    <a href="registro.html" class="btn-nav btn-register">★ REGISTRARSE</a>
-  </div>
-  <div class="hamburger" onclick="document.getElementById('mm').classList.toggle('open')">
-    <span></span><span></span><span></span>
+  <div class="nav-logo">HABITQUEST</div>
+  <div class="nav-user">
+    <span class="nav-xp">⚡ <span id="navXP">0</span> XP</span>
+    <span class="user-badge" id="navUser">JUGADOR</span>
+    <button class="btn-logout" onclick="logout()">SALIR</button>
   </div>
 </nav>
-<div class="mobile-menu" id="mm">
-  <a href="#inicio">INICIO</a><a href="#acerca">ACERCA</a><a href="#temas">TEMAS</a>
-  <a href="#dinamicas">DINÁMICAS</a><a href="#investigacion">INVESTIGACIÓN</a>
-  <a href="login.html">▶ INGRESAR</a><a href="registro.html">★ REGISTRARSE</a>
-</div>
-<div class="ticker"><span class="ticker-inner">★ BIENVENIDO A HABITQUEST ★ FORTALECE TUS HÁBITOS DE ESTUDIO ★ COMPLETA MISIONES ★ GANA XP ★ MANTÉN TU RACHA ★ UNIVERSIDAD MESOAMERICANA — UMES QUETZALTENANGO ★ INGENIERÍA EN SISTEMAS 2026 ★</span></div>
-<section class="hero" id="inicio">
-  <div class="hero-cityscape"></div>
-  <div class="hero-badge">▶ INSERT COIN TO STUDY ◀</div>
-  <h1 class="hero-title">HABITQUEST<br><span style="font-size:.6em;color:var(--cream)">HÁBITOS DE ESTUDIO</span></h1>
-  <p class="hero-sub">La plataforma gamificada para estudiantes de primer año de Ingeniería. Aprende técnicas de estudio, completa misiones y conviértete en el estudiante que siempre quisiste ser.</p>
-  <div class="hero-btns">
-    <a href="registro.html" class="btn-primary">★ EMPEZAR AHORA</a>
-    <a href="#dinamicas" class="btn-secondary">▶ VER DINÁMICAS</a>
+<div class="toast" id="toast"><div class="toast-title" id="toastTitle"></div><div class="toast-sub" id="toastSub"></div></div>
+<main>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('home',this)">🏠 INICIO</button>
+    <button class="tab" onclick="showTab('games',this)">🎮 DINÁMICAS</button>
+    <button class="tab" onclick="showTab('results',this)">📊 MIS RESULTADOS</button>
+    <button class="tab" onclick="showTab('metas',this)">🎯 METAS</button>
   </div>
-</section>
-<div class="stats-bar">
-  <div class="stat-item"><span class="stat-num" id="sUsers">0</span><div class="stat-lbl">ESTUDIANTES</div></div>
-  <div class="stat-item"><span class="stat-num">4</span><div class="stat-lbl">DINÁMICAS</div></div>
-  <div class="stat-item"><span class="stat-num">6</span><div class="stat-lbl">TEMAS</div></div>
-  <div class="stat-item"><span class="stat-num" id="sGames">0</span><div class="stat-lbl">PARTIDAS JUGADAS</div></div>
-</div>
-<section id="acerca" style="background:linear-gradient(180deg,var(--darker),var(--dark));">
-  <div class="about-grid">
-    <div class="about-text">
-      <h2>¿QUÉ ES HABITQUEST?</h2>
-      <p>HabitQuest es una plataforma interactiva diseñada para estudiantes de <strong style="color:var(--gold)">primer año de Ingeniería</strong> que necesitan fortalecer sus hábitos académicos mediante dinámicas gamificadas y seguimiento de progreso.</p>
-      <p>Basada en el <strong style="color:var(--teal)">Modelo PDCA</strong> (Planificar-Hacer-Verificar-Actuar) y teorías del aprendizaje significativo de <strong style="color:var(--teal)">Ausubel</strong>, la plataforma ofrece un ciclo de mejora continua personalizado.</p>
-      <p>Los estudiantes se registran, completan dinámicas, ganan XP, construyen rachas y los administradores pueden ver todos los resultados en tiempo real.</p>
-      <a href="registro.html" class="btn-primary" style="margin-top:14px;display:inline-block;">UNIRSE AL JUEGO →</a>
+  
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div class="stats-row">
+      <div class="stat-box"><span class="sbox-num" id="hStreak" style="color:var(--red)">🔥 0</span><div class="sbox-lbl">RACHA DÍAS</div></div>
+      <div class="stat-box"><span class="sbox-num" id="hXP" style="color:var(--gold)">⚡ 0</span><div class="sbox-lbl">XP TOTAL</div></div>
+      <div class="stat-box"><span class="sbox-num" id="hGames" style="color:var(--teal)">🎮 0</span><div class="sbox-lbl">JUEGOS COMPLETADOS</div></div>
+      <div class="stat-box"><span class="sbox-num" id="hMetas" style="color:#a29bfe">✅ 0</span><div class="sbox-lbl">METAS LOGRADAS</div></div>
     </div>
-    <div class="about-terminal float">
-      <div class="terminal-bar"><div class="t-dot t-red"></div><div class="t-dot t-gold"></div><div class="t-dot t-teal"></div></div>
-      <div class="terminal-line">> <span>EJECUTANDO DIAGNÓSTICO...</span></div>
-      <div class="terminal-line">> Organización del tiempo: <span style="color:var(--red)">CRÍTICO</span></div>
-      <div class="terminal-line">> Técnicas de estudio: <span style="color:var(--gold)">BÁSICO</span></div>
-      <div class="terminal-line">> Constancia académica: <span style="color:var(--red)">BAJO</span></div>
-      <div class="terminal-line">> <span>CARGANDO HABITQUEST.EXE...</span></div>
-      <div class="terminal-line">> Misiones activadas...<span style="color:var(--teal)"> OK</span></div>
-      <div class="terminal-line">> Sistema de racha...<span style="color:var(--teal)"> OK</span></div>
-      <div class="terminal-line">> Panel admin...<span style="color:var(--teal)"> OK</span></div>
-      <div class="terminal-line">> <span style="color:var(--gold)">LISTO PARA JUGAR</span> <div class="terminal-cursor"></div></div>
+    <div class="level-box">
+      <div class="level-top">
+        <div class="level-name" id="levelName">🌱 SEMILLERO</div>
+        <div class="level-xp"><span id="levelXP">0</span> / <span id="levelNext">200</span> XP</div>
+      </div>
+      <div class="progress-bg">
+        <div class="progress-fill" id="levelBar" style="width:0%"></div>
+        <div class="progress-txt">NIVEL <span id="levelNum">1</span></div>
+      </div>
     </div>
+    <div style="font-family:var(--pixel);font-size:.5rem;color:var(--gold);margin-bottom:16px;">▶ DINÁMICAS DISPONIBLES</div>
+    <div class="games-grid" id="homeGames"></div>
   </div>
-</section>
-<section id="temas">
-  <div class="section-title">TEMAS DE INVESTIGACIÓN</div>
-  <div class="section-sub">Contenido basado en el anteproyecto — UMES Quetzaltenango 2026</div>
-  <div class="features-grid">
-    <div class="feature-card"><span class="fc-icon">⏱️</span><div class="fc-title">ORGANIZACIÓN DEL TIEMPO</div><div class="fc-desc">Planificación de actividades académicas, horarios de estudio, agendas y planificadores. Evita la acumulación de tareas y el estudio improvisado antes de exámenes.</div></div>
-    <div class="feature-card"><span class="fc-icon">📖</span><div class="fc-title">TÉCNICAS DE ESTUDIO</div><div class="fc-desc">Subrayado, mapas conceptuales, resúmenes, repetición espaciada, Técnica Feynman y Método Pomodoro. Identifica tu estilo de aprendizaje.</div></div>
-    <div class="feature-card"><span class="fc-icon">🧠</span><div class="fc-title">GESTIÓN DEL ESTRÉS</div><div class="fc-desc">Eustress vs estrés crónico. Técnica 4-7-8, externalización de la carga mental y la importancia del sueño en la retención académica.</div></div>
-    <div class="feature-card"><span class="fc-icon">🎯</span><div class="fc-title">PLANIFICACIÓN ACADÉMICA</div><div class="fc-desc">Regla 80/20 aplicada al estudio, bloques de tiempo, buffers de emergencia y revisiones dominicales para máxima eficiencia académica.</div></div>
-    <div class="feature-card"><span class="fc-icon">💪</span><div class="fc-title">MOTIVACIÓN Y DISCIPLINA</div><div class="fc-desc">Constancia en el estudio diario. Los sistemas de hábitos superan la dependencia de la motivación puntual. Construye tu racha académica.</div></div>
-    <div class="feature-card"><span class="fc-icon">🖥️</span><div class="fc-title">HERRAMIENTAS DIGITALES</div><div class="fc-desc">Apps de gestión del tiempo, calendarios académicos electrónicos, plataformas virtuales y guías metodológicas para ingeniería.</div></div>
+  
+  <!-- GAMES -->
+  <div class="page" id="page-games">
+    <div style="font-family:var(--pixel);font-size:.55rem;color:var(--gold);margin-bottom:20px;">🎮 TODAS LAS DINÁMICAS</div>
+    <div class="games-grid" id="allGames"></div>
   </div>
-</section>
-<div class="ticker"><span class="ticker-inner" style="animation-duration:22s;animation-delay:-11s;">◆ MÉTODO POMODORO ◆ REPETICIÓN ESPACIADA ◆ TÉCNICA FEYNMAN ◆ MAPAS CONCEPTUALES ◆ REGLA 80/20 ◆ MODELO PDCA ◆ APRENDIZAJE SIGNIFICATIVO AUSUBEL ◆ CURVA DEL OLVIDO EBBINGHAUS ◆</span></div>
-<section id="dinamicas" style="background:var(--darker);">
-  <div class="section-title">DINÁMICAS INTERACTIVAS</div>
-  <div class="section-sub">Juega, aprende y gana XP — ¡regístrate para desbloquear todo!</div>
-  <div class="games-grid">
-    <a href="login.html" class="game-card"><div class="game-thumb gt1"><div class="game-pixel-grid"></div><span>⏱️</span></div><div class="game-info"><div class="game-title">TIME BREAKER</div><div class="game-desc">Ordena bloques de tiempo para construir el horario perfecto. Contra el reloj. ¿Puedes planificar tu semana ideal?</div><span class="game-badge">+80 XP</span></div></a>
-    <a href="login.html" class="game-card"><div class="game-thumb gt2"><div class="game-pixel-grid"></div><span>🧩</span></div><div class="game-info"><div class="game-title">MEMORY MATRIX</div><div class="game-desc">Empareja técnicas de estudio con sus definiciones. Entrena tu memoria a largo plazo con este juego de pares.</div><span class="game-badge">+60 XP</span></div></a>
-    <a href="login.html" class="game-card"><div class="game-thumb gt3"><div class="game-pixel-grid"></div><span>❓</span></div><div class="game-info"><div class="game-title">QUIZ BOSS</div><div class="game-desc">Derrota al jefe respondiendo todas las preguntas correctamente. Si fallas, ¡reinicia desde el inicio!</div><span class="game-badge">+100 XP</span></div></a>
-    <a href="login.html" class="game-card"><div class="game-thumb gt4"><div class="game-pixel-grid"></div><span>🎯</span></div><div class="game-info"><div class="game-title">PRIORITY RUSH</div><div class="game-desc">Clasifica tareas en la Matriz Eisenhower antes que el tiempo se acabe. ¡Urgente vs importante!</div><span class="game-badge">+70 XP</span></div></a>
+  
+  <!-- RESULTS -->
+  <div class="page" id="page-results">
+    <div style="font-family:var(--pixel);font-size:.55rem;color:var(--gold);margin-bottom:20px;">📊 MIS RESULTADOS</div>
+    <div class="results-list" id="resultsList"></div>
   </div>
-</section>
-<section id="investigacion">
-  <div class="section-title">MARCO DE INVESTIGACIÓN</div>
-  <div class="section-sub">Proyecto — Ingeniería en Sistemas, UMES Quetzaltenango, 2026</div>
-  <div class="inv-grid">
-    <div class="inv-card"><h3>PLANTEAMIENTO</h3><p>Los estudiantes de primer año de Ingeniería enfrentan cursos como Matemáticas I, Física I, Programación I que requieren razonamiento abstracto. La mayoría llega con hábitos de memorización a corto plazo e improvisación que resultan insuficientes.</p></div>
-    <div class="inv-card"><h3>OBJETIVOS</h3><ul><li>Identificar hábitos de estudio actuales</li><li>Describir dificultades de organización del tiempo</li><li>Analizar relación hábitos-rendimiento</li><li>Determinar factores personales y tecnológicos</li><li>Implementar estrategias de fortalecimiento</li></ul></div>
-    <div class="inv-card"><h3>MODELO PDCA</h3><ul><li><strong style="color:var(--gold)">PLANIFICAR:</strong> Diagnóstico con encuestas</li><li><strong style="color:var(--gold)">HACER:</strong> Plataforma + talleres</li><li><strong style="color:var(--gold)">VERIFICAR:</strong> Evaluar mejoras académicas</li><li><strong style="color:var(--gold)">ACTUAR:</strong> Ajustar estrategias continuamente</li></ul></div>
-    <div class="inv-card"><h3>EQUIPO INVESTIGADOR</h3><ul><li>F.M. Coó Cristal — 202608034</li><li>J.A. García López — 202608055</li><li>C.N. Estrada Estrada — 202608040</li><li>Á.C. Mejía Aguilar — 202608072</li><li>L.D. Orozco Soch — 202608053</li></ul></div>
+  
+  <!-- METAS -->
+  <div class="page" id="page-metas">
+    <div style="font-family:var(--pixel);font-size:.55rem;color:var(--gold);margin-bottom:20px;">🎯 MIS METAS</div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+      <input id="metaInput" type="text" placeholder="Escribe una nueva meta..." style="flex:1;min-width:200px;background:#000;border:2px solid var(--border);color:var(--cream);padding:10px 14px;font-family:var(--body);font-size:.95rem;outline:none;">
+      <button onclick="addMeta()" class="btn-sm btn-gold">+ AGREGAR</button>
+    </div>
+    <div id="metasList"></div>
   </div>
-</section>
-<footer>
-  <div class="footer-grid">
-    <div class="footer-col"><h4>HABITQUEST</h4><p style="font-size:.88rem;color:rgba(245,230,200,.6);line-height:1.7;">Plataforma educativa gamificada para fortalecer hábitos de estudio en estudiantes de ingeniería.</p></div>
-    <div class="footer-col"><h4>ACCESO</h4><ul><li><a href="registro.html">Crear cuenta</a></li><li><a href="login.html">Iniciar sesión</a></li><li><a href="dashboard.html">Panel estudiante</a></li><li><a href="admin.html">Panel admin</a></li></ul></div>
-    <div class="footer-col"><h4>TEMAS</h4><ul><li><a href="#temas">Organización del tiempo</a></li><li><a href="#temas">Técnicas de estudio</a></li><li><a href="#temas">Gestión del estrés</a></li><li><a href="#temas">Herramientas digitales</a></li></ul></div>
-    <div class="footer-col"><h4>INVESTIGACIÓN</h4><ul><li><a href="#investigacion">Marco teórico</a></li><li><a href="#investigacion">Metodología PDCA</a></li><li><a href="#investigacion">Equipo investigador</a></li><li><a href="#investigacion">UMES Quetzaltenango</a></li></ul></div>
-  </div>
-  <div class="footer-bottom">© 2026 HABITQUEST — UNIVERSIDAD MESOAMERICANA — INGENIERÍA EN SISTEMAS ★ ALL RIGHTS RESERVED</div>
-</footer>
-<script>
-const users=JSON.parse(localStorage.getItem('hq_users')||'[]');
-const sess=JSON.parse(localStorage.getItem('hq_game_sessions')||'[]');
-function animNum(el,t){let s=0,step=t/50;let i=setInterval(()=>{s+=step;if(s>=t){s=t;clearInterval(i);}el.textContent=Math.floor(s);},30);}
-animNum(document.getElementById('sUsers'),users.length);
-animNum(document.getElementById('sGames'),sess.length);
-</script>
+</main>
+
+<!-- MODAL -->
+<div class="modal-overlay hidden" id="modalOverlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script src="js/games.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>
